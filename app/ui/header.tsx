@@ -1,5 +1,5 @@
 
 
 export default function Header(){
-    return(<p>header</p>)
+    return(<h1 className="flex justify-center">Nathan Robinson</h1>)
 }
