@@ -1,12 +1,40 @@
-import Image from 'next/image'
-import Link from 'next/link'
 import Header from '@/app/ui/header'
 import Footer from '@/app/ui/footer'
+import ContentContainer from '@/app/ui/content-container'
+import Skills from '@/app/ui/skills'
+import { Suspense } from 'react'
+import SectionBreak from '@/app/ui/section-break'
+import Education from '@/app/ui/education'
+import Certifications from './ui/certifications'
+import Positions from './ui/positions'
+import Projects from './ui/projects'
 
 export default function Home() {
   return (
-    <main className="">
+    <main>
       <Header/>
+      <ContentContainer>
+        <SectionBreak/>
+        <Suspense>
+          <Skills/>
+        </Suspense>
+        <SectionBreak/>
+        <Suspense>
+          <Education/>
+        </Suspense>
+        <SectionBreak/>
+        <Suspense>
+          <Certifications/>
+        </Suspense>
+        <SectionBreak/>
+        <Suspense>
+          <Positions/>
+        </Suspense>
+        <SectionBreak/>
+        <Suspense>
+          <Projects/>
+        </Suspense>
+      </ContentContainer>
       <Footer/>
       {/* <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
         <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">

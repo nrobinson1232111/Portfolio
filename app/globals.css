@@ -25,3 +25,17 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+@layer base{
+  h1 {
+    @apply text-2xl;
+    @apply font-semibold;
+  }
+  h2 {
+    @apply text-xl;
+    @apply font-semibold;
+  }
+  a {
+    @apply hover:underline
+  }
+}
