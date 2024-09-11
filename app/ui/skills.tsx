@@ -2,13 +2,15 @@
 
 import { useEffect, useState } from 'react'
 
+type Skill = string[]
+
 export default function Skills(){
-    const [skillState, setSkillState]: [Array<string>, Function] = useState([])
+    const [skillState, setSkillState]: [Skill, Function] = useState([])
     if(typeof location !== 'undefined'){
         useEffect(()=>{
-            const pythonUrl: string = `${location.protocol}//${location.hostname}:5000`
-            fetch(`${pythonUrl}/api/python/skills`).then(response =>{
-                response.json().then((skill_array: Array<string>)=>{
+            const pythonUrl: string = `${location.protocol}//${location.hostname}:5000/api/python/skills`
+            fetch(pythonUrl).then(response =>{
+                response.json().then((skill_array: Skill)=>{
                     setSkillState(skill_array)
                 })
             })

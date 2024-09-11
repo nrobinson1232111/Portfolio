@@ -12,7 +12,7 @@ if __name__ == "__main__":
     @app.route("/api/python/education", methods=["GET"])
     def get_eduction():
         return {
-            "Stevenson Univeristy": {
+            "Stevenson University": {
                 "short_name": "Stevenson",
                 "begin_month": "Aug 2012",
                 "end_month": "May 2016",

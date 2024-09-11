@@ -2,16 +2,27 @@
 
 import { useEffect, useState } from 'react'
 
+interface Degree{
+    short_name: string,
+    begin_month: string,
+    end_month: string,
+    degree_type: string,
+    short_degree_type: string,
+    degree_subject: string
+}
 
+interface Education{
+    [school: string]: Degree
+}
 
 export default function Education(){
-    const [educationState, setEducationState]: [object, Function] = useState([])
+    const [educationState, setEducationState] = useState<Education>({})
     if(typeof location !== 'undefined'){
         useEffect(()=>{
-            const pythonUrl: string = `${location.protocol}//${location.hostname}:5000`
-            fetch(`${pythonUrl}/api/python/education`).then(response =>{
-                response.json().then((skill_array: Array<string>)=>{
-                    setEducationState(skill_array)
+            const pythonUrl: string = `${location.protocol}//${location.hostname}:5000/api/python/education`
+            fetch(pythonUrl).then(response =>{
+                response.json().then((education: Education)=>{
+                    setEducationState(education)
                 })
             })
         }, [])

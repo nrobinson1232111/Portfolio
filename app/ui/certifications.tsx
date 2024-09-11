@@ -2,13 +2,20 @@
 
 import { useEffect, useState } from "react"
 
+interface Certification{
+    name: string,
+    organization: string,
+    expiration_date: string | null,
+    link: string
+}
+
 export default function Certifications(){
-    const [certificationsState, setCertificationsState]: [Array<string>, Function] = useState([])
+    const [certificationsState, setCertificationsState] = useState<Array<Certification>>([])
     if(typeof location !== 'undefined'){
         useEffect(()=>{
-            const pythonUrl: string = `${location.protocol}//${location.hostname}:5000`
-            fetch(`${pythonUrl}/api/python/certifications`).then(response =>{
-                response.json().then((certifications_array: Array<string>)=>{
+            const pythonUrl: string = `${location.protocol}//${location.hostname}:5000/api/python/certifications`
+            fetch(pythonUrl).then(response =>{
+                response.json().then((certifications_array: Array<Certification>)=>{
                     setCertificationsState(certifications_array)
                 })
             })
