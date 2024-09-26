@@ -21,7 +21,7 @@ export default function Education(){
     const [educationState, setEducationState] = useState<Education>({})
     if(typeof location !== 'undefined'){
         useEffect(()=>{
-            if(location.protocol){
+            if(location.protocol === "http:"){
                 pythonUrl = `${location.protocol}//${location.hostname}:5000/api/python/education`
             } else{
                 pythonUrl = `${location.protocol}//${location.hostname}/python/education`
