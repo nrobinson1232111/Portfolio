@@ -9,11 +9,17 @@ interface Certification{
     link: string
 }
 
+let pythonUrl: string;
+
 export default function Certifications(){
     const [certificationsState, setCertificationsState] = useState<Array<Certification>>([])
     if(typeof location !== 'undefined'){
         useEffect(()=>{
-            const pythonUrl: string = `${location.protocol}//${location.hostname}:5000/api/python/certifications`
+            if(location.protocol === "http:"){
+                pythonUrl = `${location.protocol}//${location.hostname}:5000/api/python/certifications`
+            } else{
+                pythonUrl = `${location.protocol}//${location.hostname}/python/certifications`
+            }
             fetch(pythonUrl).then(response =>{
                 response.json().then((certifications_array: Array<Certification>)=>{
                     setCertificationsState(certifications_array)

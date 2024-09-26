@@ -10,11 +10,17 @@ interface Position{
     description: string[]
 }
 
+let pythonUrl: string;
+
 export default function Positions(){
     const [positionState, setPositionState] = useState<Array<Position>>([])
     if(typeof location !== "undefined"){
         useEffect(()=>{
-            const pythonUrl = `${location.protocol}//${location.hostname}:5000/api/python/positions`
+            if(location.protocol === "http:"){
+                pythonUrl = `${location.protocol}//${location.hostname}:5000/api/python/positions`
+            } else{
+                pythonUrl = `${location.protocol}//${location.hostname}/python/positions`
+            }
             fetch(pythonUrl).then(positionsResponse=>{
                 positionsResponse.json().then((positions: Array<Position>)=>{
                     setPositionState(positions)

@@ -15,11 +15,17 @@ interface Education{
     [school: string]: Degree
 }
 
+let pythonUrl: string;
+
 export default function Education(){
     const [educationState, setEducationState] = useState<Education>({})
     if(typeof location !== 'undefined'){
         useEffect(()=>{
-            const pythonUrl: string = `${location.protocol}//${location.hostname}:5000/api/python/education`
+            if(location.protocol){
+                pythonUrl = `${location.protocol}//${location.hostname}:5000/api/python/education`
+            } else{
+                pythonUrl = `${location.protocol}//${location.hostname}/python/education`
+            }
             fetch(pythonUrl).then(response =>{
                 response.json().then((education: Education)=>{
                     setEducationState(education)
