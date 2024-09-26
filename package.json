@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "flask-dev": ".\\api\\.venv\\Scripts\\activate && python -m pip install --user -r requirements.txt && python api/index.py -p --debug",
+    "flask-dev": ".\\api\\.venv\\Scripts\\activate && python -m pip install --user -r requirements.txt && python -m flask --app api/index.py run --debug",
     "next-dev": "next dev",
     "dev": "concurrently \"pnpm run next-dev\" \"pnpm run flask-dev\"",
     "build": "next build",
-    "start": "next start",
+    "flask-start": "source ./.venv/bin/activate && cd api && waitress-serve --port=5000 index:app",
+    "next-start": "next start",
+    "start": "concurrently \"npm run next-start\" \"npm run flask-start\"",
     "lint": "next lint"
   },
   "dependencies": {
