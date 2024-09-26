@@ -15,6 +15,7 @@ export default function Projects(){
     if(typeof location !== "undefined"){
         useEffect(()=>{
             const projectsLink = `http://${location.hostname}:5000/api/python/projects`
+            console.log(projectsLink)
             fetch(projectsLink).then((projectsLinkResponse: Response) => {
                 projectsLinkResponse.json().then((projects: Array<Position>) => {
                     setProjectsState(projects)
