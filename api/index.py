@@ -1,12 +1,10 @@
 import os
 from flask import Flask
 from model import db, Certifications, Skills, Education, Positions, Projects
-# dev only
-# from flask_cors import CORS
+from flask_cors import CORS
 
 app = Flask(__name__)
-# dev only
-# CORS(app)
+CORS(app)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ['POSTGRES_LINK']
 
