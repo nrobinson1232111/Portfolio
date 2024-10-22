@@ -1,10 +1,14 @@
+import os
 from flask import Flask
-from flask import request
 from model import db, Certifications, Skills, Education, Positions, Projects
+# dev only
+# from flask_cors import CORS
 
 app = Flask(__name__)
+# dev only
+# CORS(app)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:postgres@localhost:5432/postgres"
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ['POSTGRES_LINK']
 
 db.init_app(app)
 
