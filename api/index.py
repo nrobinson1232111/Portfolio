@@ -25,8 +25,8 @@ def get_eduction():
     for education in education_query:
         educations[education.school_name] = {
             "short_name": education.short_name,
-            "begin_month": education.begin_month,
-            "end_month": education.end_month,
+            "begin_month": education.begin_month.strftime("%b %Y"),
+            "end_month": education.end_month.strftime("%b %Y"),
             "degree_type": education.degree_type,
             "short_degree_type": education.short_degree_type,
             "degree_subject": education.degree_subject
@@ -38,7 +38,8 @@ def get_certifications():
     certifications = []
     certifications_query = db.session.execute(db.select(Certifications)).scalars()
     for certification in certifications_query:
-        certifications.append({"name": certification.organization, "organization": certification.organization, "expiration_date": certification.expiration_date, "link": certification.link})
+        expiration_date_string = None if certification.expiration_date is None else certification.expiration_date.strftime("%b %Y")
+        certifications.append({"name": certification.organization, "organization": certification.organization, "expiration_date": expiration_date_string, "link": certification.link})
     return certifications
 
 @app.route("/api/python/positions", methods=["GET"])
@@ -46,7 +47,9 @@ def get_positions():
     positions = []
     positions_query = db.session.execute(db.select(Positions)).scalars()
     for position in positions_query:
-        positions.append({"position": position.position, "company": position.company, "begin_month": position.begin_month, "end_month": position.end_month, "description": [description.description for description in position.descriptions]})
+        begining_month_string = None if position.begin_month is None else position.begin_month.strftime("%b %Y")
+        ending_month_string = None if position.end_month is None else position.end_month.strftime("%b %Y")
+        positions.append({"position": position.position, "company": position.company, "begin_month": begining_month_string, "end_month": ending_month_string, "description": [description.description for description in position.descriptions]})
     return positions
 
 @app.route("/api/python/projects", methods=["GET"])
